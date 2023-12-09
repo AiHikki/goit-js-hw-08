@@ -73,16 +73,16 @@ function handleClick(event) {
 
   const imageSource = event.target.dataset.source;
   if (imageSource) {
-    const modal = basicLightbox.create(`
-      	<img width="1400" height="640" src="${imageSource}">
+    const instance = basicLightbox.create(`
+      	<img width="1112" height="640" src="${imageSource}">
     `);
-    modal.show();
+    instance.show();
 
     document.addEventListener(
       'keydown',
       event => {
         if (event.key === 'Escape') {
-          modal.close();
+          instance.close();
         }
       },
       { once: true }
