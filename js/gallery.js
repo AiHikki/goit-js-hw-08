@@ -69,21 +69,22 @@ container.innerHTML = images.reduce(
 container.addEventListener('click', event => {
   event.preventDefault();
   const imageSource = event.target.dataset.source;
+  const imageDesc = event.target.alt;
   if (!imageSource) return;
-  const html = `<img src="${imageSource}">`;
+  const html = `<img src="${imageSource}" alt="${imageDesc}">`;
 
   const instance = basicLightbox.create(html, {
     onShow: instance => {
       document.addEventListener('keydown', onKey);
     },
     onClose: instance => {
-      document.removeEventListener(`keydown`, onKey);
+      document.removeEventListener('keydown', onKey);
     },
   });
   instance.show();
 
   function onKey(event) {
-    if (event.code === 'Escape') {
+    if (event.key === 'Escape') {
       instance.close();
     }
   }
