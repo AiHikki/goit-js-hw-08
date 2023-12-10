@@ -66,26 +66,25 @@ container.innerHTML = images.reduce(
   ''
 );
 
-container.addEventListener('click', handleClick);
-
-function handleClick(event) {
+container.addEventListener('click', event => {
   event.preventDefault();
-
   const imageSource = event.target.dataset.source;
-  if (imageSource) {
-    const instance = basicLightbox.create(`
-      	<img width="1112" height="640" src="${imageSource}">
-    `);
-    instance.show();
+  if (!imageSource) return;
+  const html = `<img src="${imageSource}">`;
 
-    document.addEventListener(
-      'keydown',
-      event => {
-        if (event.key === 'Escape') {
-          instance.close();
-        }
-      },
-      { once: true }
-    );
+  const instance = basicLightbox.create(html, {
+    onShow: instance => {
+      document.addEventListener('keydown', onKey);
+    },
+    onClose: instance => {
+      document.removeEventListener(`keydown`, onKey);
+    },
+  });
+  instance.show();
+
+  function onKey(event) {
+    if (event.code === 'Escape') {
+      instance.close();
+    }
   }
-}
+});
