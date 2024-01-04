@@ -52,17 +52,18 @@ container.innerHTML = images.reduce(
   (html, { preview, original, description }) =>
     html +
     `
-  <li class="gallery-item">
+ <li class="gallery-item">
   <a class="gallery-link" href="${original}">
     <img
-    class="gallery-image"
-    src="${preview}"
-    data-source="${original}"
-    alt="${description}"
+      class="gallery-image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
     />
-    </a>
-    </li>
-    `,
+  </a>
+</li>
+
+`,
   ''
 );
 
